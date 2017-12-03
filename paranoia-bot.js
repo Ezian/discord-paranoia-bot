@@ -1,6 +1,7 @@
 var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
+const complexealpha = require('./complexealpha');
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
@@ -18,22 +19,23 @@ bot.on('ready', function (evt) {
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
 bot.on('message', function (user, userID, channelID, message, evt) {
-    // Our bot needs to know if it will execute a command
-    // It will listen for messages that will start with `!`
-    if (message.substring(0, 1) == '!') {
-        var args = message.substring(1).split(' ');
-        var cmd = args[0];
-       
-        args = args.splice(1);
-        switch(cmd) {
-            // !ping
-            case 'ping':
-                bot.sendMessage({
-                    to: channelID,
-                    message: 'Pong!'
-                });
-            break;
-            // Just add any case commands if you want to..
-         }
-     }
+    if(message.toLowerCase().includes("ordinateur")){
+        var citoyen = complexealpha.findCitoyen(userID, user, channelID)
+        var citoyen_id = citoyen.id()
+        // Le bot réagit dès lors qu'on prononce le mot "ordinateur", et attends uniquement la phrase "Bonjour Ordinateur!"
+        // Toute erreur engendre de la trahison...
+        if(message == "Bonjour Ordinateur!"){
+            reponse = "BONJOUR CITOYEN " + citoyen_id + "."
+        } else {
+            reponse = "CITOYEN " + citoyen_id + ". VOTRE MECONNAISSANCE DU PROTOCOLE 351 EST UN ACTE DE TRAHISON."        
+        }
+
+        // L'ordinateur réponds toujours en majuscule
+        bot.sendMessage({
+            to: channelID,
+            message: reponse.toUpperCase()
+        });
+
+
+    }
 });

@@ -1,0 +1,4 @@
+{
+    "accreditations" : ["Infrarouge", "Rouge", "Orange", "Jaune", "Vert", "Bleu", "Indigo", "Violet", "Ultraviolet"],
+    "secteurs": ["THA","THB","THC", "LSA", "LSB", "LSC", "INS", "MAV"]
+}
