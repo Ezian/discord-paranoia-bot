@@ -1,0 +1,11 @@
+{
+    "name": "Ordinateur",
+    "version": "0.1.0",
+    "description": "Un bot paranoïaque, qui veut tout contrôler, pour votre bien",
+    "main": "paranoia-bot.js",
+    "author": "Guillaume FOUILLET",
+    "dependencies": {
+        "discord.io": "^2.5.3",
+        "winston": "^2.4.0"
+    }
+}
